@@ -5,10 +5,11 @@
 
   outputs = { self, nixpkgs }: 
   let 
-    system = "x8664-linux";  # Adjust for your system if needed
+    system = "x86_64-linux";  # Adjust for your system if needed
     pkgs = import nixpkgs { inherit system; };
   in {
     packages.${system}.default = pkgs.writeShellScriptBin "duck" ''
+      #!/bin/sh
       TEXT="$1"
 
       if [ -z "$TEXT" ]; then
@@ -16,7 +17,8 @@
       fi
 
       LENGTH=${#TEXT}
-      BORDER=$(printf '%*s' "$LENGTH" '' | tr ' ' '-')
+      BORDER=$(head -c "$LENGTH" < /dev/zero | tr '\0' '-')
+
 
       echo "      $BORDER"
       echo "     / $TEXT \"

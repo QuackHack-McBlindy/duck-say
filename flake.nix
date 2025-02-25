@@ -16,7 +16,7 @@
       fi
 
       LENGTH=${#TEXT}
-      BORDER=$(printf '%.0s' $(seq 1 $LENGTH))
+      BORDER=$(printf '%*s' "$LENGTH" '' | tr ' ' '-')
 
       echo "      $BORDER"
       echo "     / $TEXT \"

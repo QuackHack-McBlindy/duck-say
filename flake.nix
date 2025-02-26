@@ -1,11 +1,11 @@
 {
-  description = "A talking ASCII duck with nix run!";
+  description = "A duck says - what?";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs";
 
   outputs = { self, nixpkgs }: 
   let 
-    system = "x8664-linux";
+    system = "x86_64-linux";
     pkgs = import nixpkgs { inherit system; };
   in {
     packages.${system}.default = pkgs.writeShellScriptBin "duck" ''
@@ -18,26 +18,25 @@
       fi
 
       LENGTH=$(echo -n "$TEXT" | wc -c)
-      BORDER=$(printf '%.0s' $(seq 1 $LENGTH))
-
+      BORDER=$(head -c "$LENGTH" < /dev/zero | tr '\0' '-')
 
       echo "      $BORDER"
-      echo "     / $TEXT \"
-      echo "     \$BORDER/"
+      echo "     / $TEXT \\"
+      echo "     \\ $BORDER /"
       echo "        ,----,"
-      echo "   .`      `,"
-      echo "   `===  D     :"
-      echo "     `'.      .'"
+      echo "   ___.\`      \`,"
+      echo "   \`===  D     :"
+      echo "     \`'.      .'"
       echo "        )    (                   ,"
-      echo "       /      \__/|"
+      echo "       /      \\_________________/|"
       echo "      /                          |"
       echo "     |                           ;"
-      echo "     |               _       /"
-      echo "     |      \       __7    ,'"
-      echo "     |       \    __7     /"
-      echo "      \       `-,____7      ,'   jgs"
-      echo "^~^~^~^`\                  /~^~^~^~^"
-      echo "  ~^~^~^ `----------------' ~^~^~^"
+      echo "     |               _____       /"
+      echo "     |      \\       ______7    ,'"
+      echo "     |       \\    ______7     /"
+      echo "      \\       \`-,____7      ,'"
+      echo "^~^~^~^\\                  /~^~^~^~^"
+      echo "  ~^~^~^ \`----------------' ~^~^~^"
       echo " ~^~^~^~^~^^~^~^~^~^~^~^~^~^~^~^~"
     '';
   };

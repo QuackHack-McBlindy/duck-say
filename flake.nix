@@ -1,23 +1,24 @@
 {
   description = "A talking ASCII duck with nix run!";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs";  # Import nixpkgs
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs";
 
   outputs = { self, nixpkgs }: 
   let 
-    system = "x86_64-linux";  # Adjust for your system if needed
+    system = "x8664-linux";
     pkgs = import nixpkgs { inherit system; };
   in {
     packages.${system}.default = pkgs.writeShellScriptBin "duck" ''
-      #!/bin/sh
+      #!/usr/bin/env bash
+
       TEXT="$1"
 
       if [ -z "$TEXT" ]; then
         TEXT="Quack?"
       fi
 
-      LENGTH=${#TEXT}
-      BORDER=$(head -c "$LENGTH" < /dev/zero | tr '\0' '-')
+      LENGTH=$(echo -n "$TEXT" | wc -c)
+      BORDER=$(printf '%.0s' $(seq 1 $LENGTH))
 
 
       echo "      $BORDER"

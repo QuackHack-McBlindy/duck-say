@@ -4,7 +4,7 @@ the duck says - what?
 
 ```
 
-$ nix run github:QuackHack-McBlindy/duck-say "hejsan hoppsan qwack qwack"
+$ nix run github:QuackHack-McBlindy/duck-say "hejsan hoppsan qwack qwack" --no-write-lock-file
 
 
 

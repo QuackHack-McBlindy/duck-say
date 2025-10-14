@@ -1,16 +1,18 @@
-# duck-say
-the duck says - what?
+#  🦆 duck-say
+🦆 says ⮞ what
 
+## Make the duck sing!
+
+__Try it out yourself!__  
+
+```bash
+$ nix run github:QuackHack-McBlindy/duck-say "quack quack duck talk" --no-write-lock-file
+``` 
 
 ```
 
-$ nix run github:QuackHack-McBlindy/duck-say "hejsan hoppsan qwack qwack" --no-write-lock-file
-
-
-
-
       --------------------------
-     / hejsan hoppsan qwack qwack \
+     / quack quack duck talk      \
      \ -------------------------- /
         ,----,
    ___.`      `,

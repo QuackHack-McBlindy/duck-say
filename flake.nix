@@ -5,10 +5,11 @@
 
   outputs = { self, nixpkgs }: 
   let 
-    system = "x86_64-linux";
-    pkgs = import nixpkgs { inherit system; };
+    per_system = nixpkgs.lib.genAttrs nixpkgs.lib.systems.doubles.all;
+    pkgs = system: import nixpkgs { inherit system; };
   in {
-    packages.${system}.default = pkgs.writeShellScriptBin "duck" ''
+    packages = per_system (system: {
+      default = (pkgs system).writeShellScriptBin "duck" ''
       #!/usr/bin/env bash
 
       TEXT="$1"
@@ -39,5 +40,6 @@
       echo "  ~^~^~^ \`----------------' ~^~^~^"
       echo " ~^~^~^~^~^^~^~^~^~^~^~^~^~^~^~^~"
     '';
+    });
   };
 }
